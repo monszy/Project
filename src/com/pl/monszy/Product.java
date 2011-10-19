@@ -1,10 +1,10 @@
 package com.pl.monszy;
 
 
-public class Car {
+public class Product {
 public String marka;
 public String nr;
-public Car(String marka, String nr){
+public Product(String marka, String nr){
 this.marka=marka;
 this.nr=nr;
 }

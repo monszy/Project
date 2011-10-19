@@ -3,23 +3,23 @@ package com.pl.monszy;
 import java.util.ArrayList;
 import java.util.List;
  
-public class Osoba {
+public class Person {
 public String imie;
 public String nazwisko;
-public Osoba(String imie, String nazwisko)
+public Person(String imie, String nazwisko)
 {
 this.imie=imie;
 this.nazwisko=nazwisko;
 }
-public Osoba(String imie, String nazwisko, List<Car> cars)
+public Person(String imie, String nazwisko, List<Product> cars)
 {
 this.imie=nazwisko;
 this.nazwisko=nazwisko;
 this.cars=cars;
 }
-public List<Car> cars= new ArrayList<Car>();
+public List<Product> cars= new ArrayList<Product>();
 public void printCars(){
-for(Car c : this.cars)
+for(Product c : this.cars)
 {
 c.printCar();
 }
