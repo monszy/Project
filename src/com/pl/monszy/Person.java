@@ -11,17 +11,22 @@ public Person(String imie, String nazwisko)
 this.imie=imie;
 this.nazwisko=nazwisko;
 }
-public Person(String imie, String nazwisko, List<Product> cars)
+public Person(String imie, String nazwisko, List<Product> products)
 {
-this.imie=nazwisko;
+this.imie=imie;
 this.nazwisko=nazwisko;
-this.cars=cars;
+this.products=products;
 }
-public List<Product> cars= new ArrayList<Product>();
-public void printCars(){
-for(Product c : this.cars)
+public void printPerson()
 {
-c.printCar();
+System.out.println("imie: "+imie+"\t nazwisko: "+nazwisko);
+}
+public List<Product> products= new ArrayList<Product>();
+public void printProducts(){
+for(Product c : this.products)
+{
+c.printProduct();
 }
 }
+
 }
