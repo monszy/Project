@@ -7,11 +7,12 @@ import java.util.List;
 public class Product {
 public String name;
 public String information;
+
 public Product(String name, String information){
 this.name=name;
 this.information=information;
 }
-public Product(String name, String information, List<Person> Persons)
+public Product(String name, String information, ArrayList<Person> Persons)
 {
 this.name=name;
 this.information=information;
@@ -29,5 +30,23 @@ for(Person g : this.Persons)
 {
 g.printPerson();
 }
+}
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public String getInformation() {
+	return information;
+}
+public void setInformation(String information) {
+	this.information = information;
+}
+public List<Person> getPersons() {
+	return Persons;
+}
+public void setPersons(List<Person> persons) {
+	Persons = persons;
 }
 }
