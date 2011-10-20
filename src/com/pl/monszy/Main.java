@@ -144,6 +144,32 @@ case 8:
 	  System.out.println("Nie znaleziono"); break; }
 	}*/
 case 9:
+	System.out.println("Podaj element który hcesz usun¹æ: ");
+	a = in.readLine();
+              pozycja = 0;
+             for(Person g : Persons) {
+                     if (g.getImie().equals(a)) {
+                             System.out.println("Osoba o imieniu: " + g.getImie() + " znajdowa³a siê na pozycji " + pozycja ); g.printPerson(); Persons.remove(pozycja);
+                             System.out.println("Zosta³ on usuniêty!!"); break;
+                     }
+                     else if (g.getNazwisko().equals(a)) {
+                    	 System.out.println("Osoba o nazwisku: " + g.getNazwisko() + " znajdowa³a siê na pozycji " + pozycja ); g.printPerson(); Persons.remove(pozycja);
+                    	 System.out.println("Zosta³ on usuniêty!!"); break;
+                     }
+                     
+                     pozycja++;
+             }
+             pozycja = 0;
+             for(Product c : products) {
+            	 if (c.getName().equals(a)) {
+                     System.out.println("Produkt o Nazwie: " + c.getName() + " znajdowa³ siê na pozycji " + pozycja ); c.printProduct(); products.remove(pozycja);
+                     System.out.println("Zosta³ on usuniêty!!"); break;
+             }
+             
+             
+             pozycja++;
+             }
+             break;
 	
 case 10: //exit
 System.exit(0);
