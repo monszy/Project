@@ -23,9 +23,13 @@ System.out.println("imie: "+imie+"\t nazwisko: "+nazwisko);
 }
 public ArrayList<Product> products= new ArrayList<Product>();
 public void printProducts(){
+int	pozycja = 1;
 for(Product c : this.products)
+
 {
+System.out.print(pozycja + " ");
 c.printProduct();
+pozycja++;
 }
 }
 public String getImie() {
