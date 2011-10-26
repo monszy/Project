@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="project">
+
+<description>
+project
+</description>
+
+<property name="bin" value="bin"></property>
+<property name="src" value="src"></property>
+<property name="jar" value="${bin}/jar"></property>
+
+<target name="compile">
+<mkdir dir="bin"/>
+<javac srcdir="src" destdir="bin"/>
+</target>
+
+<target name="jar">
+<mkdir dir="bin/jar"/>
+<jar destfile="${jar}/SimpleProject.jar" basedir="bin">
+<manifest>
+<attribute name="Main-Class" value="com.pl.monszy.Main"/>
+</manifest>
+</jar>
+</target>
+
+<target name="run-jar">
+<java jar="${jar}/SimpleProject.jar" fork="true"/>
+</target>
+
+<target name="clean">
+<delete dir="bin/jar">
+</delete>
+</target>
+
+
+<target name="backup">
+<copy todir="../backup/dir" >
+<fileset dir="src_dir" >
+<exclude name="**/*.java"/>
+</fileset>
+</copy>
+</target>
+
+</project>
