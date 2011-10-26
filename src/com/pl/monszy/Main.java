@@ -29,11 +29,10 @@ public class Main {
 	Persons.add(new Person("Gabrys","Szmel"));
 
 
-
 do
 {
 	pouse.Sec(6);
-//wyœwietlenie menu
+//wyï¿½wietlenie menu
 mmo.showmenu();
  
 System.out.flush();
@@ -46,14 +45,14 @@ switch (choice)
  
 
 case 1:
-	// wyœwietlenie wielkoœci list
+	// wyï¿½wietlenie wielkoï¿½ci list
 	mmo.showsize(Persons, products); break;
 case 2:
-	// wyœwietlenie listy Osób
+	// wyï¿½wietlenie listy Osï¿½b
 	mmo.showlistperson(Persons);
 	break;
 case 3:
-	// wyœwietlenie listy produktów
+	// wyï¿½wietlenie listy produktï¿½w
 	mmo.showlistproducts(products);
 	break;
 case 4:
@@ -83,5 +82,6 @@ System.out.println("\nProsze wybrac z menu (1-10) \n");}
 }
 while(choice!= 10);
 }
+	 
 }
 
