@@ -1,7 +1,7 @@
 package com.pl.monszy;
 
 import java.util.ArrayList;
-import java.util.List;
+
  
 public class Person {
 public String imie;
