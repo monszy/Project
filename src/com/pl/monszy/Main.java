@@ -60,7 +60,7 @@ choiceString = in.readLine();
 try
 {
 	choice = Integer.parseInt(choiceString);
-	
+	throw new Wyjatek("Int?");
 	  
 }
  catch(Exception e) 
