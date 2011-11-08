@@ -55,6 +55,8 @@ public void setName(String name) {
 	this.name = name;
 }
 public String getInformation() {
+	
+	
 	return information;
 }
 public void setInformation(String information) {
@@ -150,12 +152,12 @@ public static void addProduct(ArrayList<Product> products) throws IOException{
 			try
 			{
 				a = in.readLine(); 
-				if(a == null) 
-				    throw new IOException("Musisz podac element jaki chcesz usunac"); 
+				
+				  
 			}
 			 catch(Wyjatek e) 
 			   { 
-				logger.info(e.getMessage());
+				logger.error("Wyj¹tek: "+e.getMessage());
 			}
 			
 		             int pozycja = 0;

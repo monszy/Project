@@ -4,17 +4,19 @@ package com.pl.monszy;
 
 import java.io.*;
 import java.util.*;
-
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
+import com.pl.monszy.Wyjatek;	
 
 
 public class Main {
-	
+	private static Logger logger = Logger.getLogger(Main.class);
 	
 	
 
 	public static void main(String[] args) throws IOException
 {
-	
+		PropertyConfigurator.configure("Log4J.properties");
 	
 	//tworzenie biektu do odczytania z consoli (bufferedReader)
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -54,7 +56,18 @@ do
 System.out.flush();
 choiceString = in.readLine();
 
-//zamiana string na int
+
+try
+{
+	choice = Integer.parseInt(choiceString);
+	
+	  
+}
+ catch(Exception e) 
+   { 
+
+	logger.error("Wyj¹tek, musisz podac inta a nie...: "+e.getMessage());
+}	
 choice = Integer.parseInt(choiceString);
 switch (choice)
 {
