@@ -1,13 +1,18 @@
 package com.pl.monszy;
 
+import com.pl.monszy.Wyjatek;	
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
 
 
 public class Product {
+	private static Logger logger = Logger.getLogger(Main.class);
+	
 public String name;
 public String information;
 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -20,6 +25,7 @@ int f = 0;
 int choice;
 
 public Product(String name, String information){
+	PropertyConfigurator.configure("Log4J.properties");
 this.name=name;
 this.information=information;
 }
@@ -98,7 +104,7 @@ public static void addProduct(ArrayList<Product> products) throws IOException{
 	
 	
 		
-		public static void search(ArrayList<Person> Persons, ArrayList<Product> products) throws IOException {
+		public static int search(ArrayList<Person> Persons, ArrayList<Product> products) throws IOException {
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			
 			String a = null;
@@ -106,6 +112,7 @@ public static void addProduct(ArrayList<Product> products) throws IOException{
 			System.out.println("Podaj wyszukiwany element: ");
 			a = in.readLine();
 		             int pozycja = 0;
+		
 		             for(Person g : Persons) {
 		                     if (g.getImie().contains(a)) {
 		                             System.out.println("Osoba o imieniu: " + g.getImie() + " znajduje si� na pozycji " + pozycja + ". Na li�cie Os�b" ); g.printPerson(); 
@@ -127,17 +134,28 @@ public static void addProduct(ArrayList<Product> products) throws IOException{
 		             
 		             pozycja++;
 		             }
-		             
+		           return pozycja;
 		   
 		}
 		public static void delete(ArrayList<Person> Persons, ArrayList<Product> products) throws IOException{
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			
+			
 			String a = null;
 			
 		
-			System.out.println("Podaj element kt�ry chcesz usun��: ");
-			a = in.readLine();
+			System.out.println("Podaj element ktory chcesz usunac: ");
+			try
+			{
+				a = in.readLine(); 
+				if(a == "\n") 
+				    throw new IOException("Musisz podac element jaki chcesz usunac"); 
+			}
+			 catch(Wyjatek e) 
+			   { 
+				logger.info(e.getMessage());
+			}
+			
 		             int pozycja = 0;
 		             for(Person g : Persons) {
 		                     if (g.getImie().equals(a)) {
