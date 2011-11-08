@@ -85,20 +85,35 @@ public static void addProduct(ArrayList<Product> products) throws IOException{
 	products.add(new Product(a,b));
 	}
 	public static void editlistproducts(ArrayList<Product> products) throws IOException{
+		PropertyConfigurator.configure("Log4J.properties");
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		logger.info("zedytowales liste produktow");
+		
 		
 		String a = null;
 		String b = null;
 		String fa = null;
 		int f = 0;
-		
+		String fb = null;
+		int fc = 100;
+		System.out.println("Ile produktow chcesz edytowac?: "); fb = in.readLine();
+		fc = Integer.parseInt(fb);
+		for (int i = 0; i <= fc; i++ ){
 	System.out.println("Podaj nr elementu kt�ry chesz edytowac: "); fa = in.readLine();
 	f = Integer.parseInt(fa);
 	System.out.print("Podaj nazw�: ");a = in.readLine(); 
 	System.out.print("Podaj opis: ");b = in.readLine();
 	// dodanie elementu do listy produkt�w
-	products.set(f,new Product(a,b));
+	try {
+		products.set(f,new Product(a,b));
+	  } catch (ArrayIndexOutOfBoundsException e) {
+		  
+		  System.out.println("Niepoprawny parametr, rozmiar tablicy to: "+ products.size());
+		  logger.error("Za duzy index list "+ fa +" gdzie lista ma rozmiar"+ products.size());
+	  }
+}
+	
+		
+	logger.info("zedytowales liste produktow");
 	}
 	public static void showsize(ArrayList<Person> Persons, ArrayList<Product> products) {
 		System.out.println("Size the list of products: "+products.size());

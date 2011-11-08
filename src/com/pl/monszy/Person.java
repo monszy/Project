@@ -83,12 +83,17 @@ public static void editlistpersons(ArrayList<Person> Persons) throws IOException
 	String b = null;
 	String fa = null;
 	int f = 0;
-	
+	int fc = 100;
+	String fb = null;
+	System.out.println("Ile osob chcesz edytowac?: "); fb = in.readLine();
+	fc = Integer.parseInt(fb);
+	for (int i = 0; i <= fc; i++ ){
 	System.out.println("Podaj nr elementu kt�ry chesz edytowac: "); fa = in.readLine();
 	f = Integer.parseInt(fa);
 	System.out.print("Podaj imie: ");a = in.readLine(); 
 	System.out.print("Podaj nazwisko: ");b = in.readLine();
 	// dodanie elementu do listy produkt�w
 	Persons.set(f,new Person(a,b));
+}
 }
 }
