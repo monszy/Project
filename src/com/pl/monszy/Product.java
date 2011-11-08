@@ -69,10 +69,11 @@ public void setPersons(List<Person> persons) {
 public static void showlistproducts(ArrayList<Product> products){
 	Person o= new Person("Jan","Nowak",products);
 	o.printProducts(); 
+	logger.info("wyœwietli³eœ produkty");
 }
 public static void addProduct(ArrayList<Product> products) throws IOException{
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-	
+	logger.info("dodales produkt");
 	String a = null;
 	String b = null;
 	
@@ -83,6 +84,7 @@ public static void addProduct(ArrayList<Product> products) throws IOException{
 	}
 	public static void editlistproducts(ArrayList<Product> products) throws IOException{
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		logger.info("zedytowales liste produktow");
 		
 		String a = null;
 		String b = null;
@@ -148,7 +150,7 @@ public static void addProduct(ArrayList<Product> products) throws IOException{
 			try
 			{
 				a = in.readLine(); 
-				if(a == "\n") 
+				if(a == null) 
 				    throw new IOException("Musisz podac element jaki chcesz usunac"); 
 			}
 			 catch(Wyjatek e) 
