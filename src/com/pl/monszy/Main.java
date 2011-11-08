@@ -7,7 +7,9 @@ import java.util.*;
 public class Main {
 	
 	
-	 public static void main(String[] args) throws IOException
+	 
+
+	public static void main(String[] args) throws IOException
 {
 	
 	
@@ -17,7 +19,7 @@ public class Main {
 	String choiceString;
 	int choice;
 
-	edit mmo = new edit();
+	
 	
 	ArrayList<Product> products= new ArrayList<Product>();
 	products.add(new Product("Film","best film ever"));
@@ -33,8 +35,19 @@ do
 {
 	pouse.Sec(6);
 //wy�wietlenie menu
-mmo.showmenu();
- 
+
+	System.out.println("\n---------- Menu------------");
+	System.out.println("1. Wyswietl wielkosc list");
+	System.out.println("2. Wyswietlenie listy osob");
+	System.out.println("3. Wyswietlenie listy produkt�w");
+	System.out.println("4. dodanie element�w do listy osob");
+	System.out.println("5. dodanie element�w do listy produkt�w");
+	System.out.println("6. edycja elementu na liscie produktow");
+	System.out.println("7. edycja elementu na liscie os�b");
+	System.out.println("8. Wyszukiwanie elementu w listach");
+	System.out.println("9. usuni�ci� wiersza zawieraj�cego podany element");
+	System.out.println("10. Quit");
+	System.out.println("Co wybierasz? : ");
 System.out.flush();
 choiceString = in.readLine();
 
@@ -46,32 +59,32 @@ switch (choice)
 
 case 1:
 	// wy�wietlenie wielko�ci list
-	mmo.showsize(Persons, products); break;
+	Product.showsize(Persons, products); break;
 case 2:
 	// wy�wietlenie listy Os�b
-	mmo.showlistperson(Persons);
+	Person.showlistperson(Persons);
 	break;
 case 3:
 	// wy�wietlenie listy produkt�w
-	mmo.showlistproducts(products);
+	Product.showlistproducts(products);
 	break;
 case 4:
-	mmo.addPerson(Persons);
+	Person.addPerson(Persons);
 	break;
 case 5:
-	mmo.addProduct(products);
+	Product.addProduct(products);
 	break;
 case 6:
-	mmo.editlistproducts(products);
+	Product.editlistproducts(products);
 	break;
 case 7:
-	mmo.editlistpersons(Persons);
+	Person.editlistpersons(Persons);
 	break;
 case 8:
-	mmo.search(Persons, products);
+	Product.search(Persons, products);
 	break;
 case 9:
-	mmo.delete(Persons, products);
+	Product.delete(Persons, products);
              break;
 	
 case 10: //exit
