@@ -23,7 +23,9 @@ public class Main {
 	 
 	String choiceString;
 	int choice;
-
+	String a = null;
+	String fb = null;
+	int fc = 0;
 	
 	
 	ArrayList<Product> products= new ArrayList<Product>();
@@ -38,7 +40,7 @@ public class Main {
 
 do
 {
-	pouse.Sec(6);
+	pouse.Sec(4);
 //wyï¿½wietlenie menu
 
 	System.out.println("\n---------- Menu------------");
@@ -66,7 +68,7 @@ try
  catch(Exception e) 
    { 
 
-	logger.error("Wyj¹tek, musisz podac inta a nie...: "+e.getMessage());
+	logger.error("Wyjï¿½tek, musisz podac inta a nie...: "+e.getMessage());
 }	
 choice = Integer.parseInt(choiceString);
 switch (choice)
@@ -91,16 +93,27 @@ case 5:
 	Product.addProduct(products);
 	break;
 case 6:
-	Product.editlistproducts(products);
+	
+	System.out.println("Ile produktow chcesz edytowac?: "); fb = in.readLine();
+	fc = Integer.parseInt(fb);
+	Product.editlistproducts(products, fc);
 	break;
 case 7:
 	Person.editlistpersons(Persons);
 	break;
 case 8:
-	Product.search(Persons, products);
+
+	
+	System.out.println("Podaj wyszukiwany element: ");
+	a = in.readLine();
+	Product.searchPerson(Persons, a);
 	break;
 case 9:
-	Product.delete(Persons, products);
+
+	
+	System.out.println("Podaj element ktory chcesz usunac z : ");
+	a = in.readLine();
+	Product.deletePerson(Persons, a);
              break;
 	
 case 10: //exit

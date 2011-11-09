@@ -71,7 +71,7 @@ public void setPersons(List<Person> persons) {
 public static void showlistproducts(ArrayList<Product> products){
 	Person o= new Person("Jan","Nowak",products);
 	o.printProducts(); 
-	logger.info("wyœwietli³eœ produkty");
+	logger.info("wyï¿½wietliï¿½eï¿½ produkty");
 }
 public static void addProduct(ArrayList<Product> products) throws IOException{
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -84,31 +84,32 @@ public static void addProduct(ArrayList<Product> products) throws IOException{
 	// dodanie elementu do listy produktï¿½w
 	products.add(new Product(a,b));
 	}
-	public static void editlistproducts(ArrayList<Product> products) throws IOException{
+	public static void editlistproducts(ArrayList<Product> products, int fc) throws IOException{
 		PropertyConfigurator.configure("Log4J.properties");
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
 		
 		String a = null;
 		String b = null;
-		String fa = null;
+		String c = null;
 		int f = 0;
-		String fb = null;
-		int fc = 100;
-		System.out.println("Ile produktow chcesz edytowac?: "); fb = in.readLine();
-		fc = Integer.parseInt(fb);
-		for (int i = 0; i <= fc; i++ ){
-	System.out.println("Podaj nr elementu ktï¿½ry chesz edytowac: "); fa = in.readLine();
-	f = Integer.parseInt(fa);
-	System.out.print("Podaj nazwï¿½: ");a = in.readLine(); 
+		
+		
+		for (int i = 1; i <= fc; i++ ){
+			System.out.println("Podaj element ktory chcesz edytowac na liscie productow: ");
+			a = in.readLine();
+	
+	f = products.indexOf(searchProduct(products, a));
+	System.out.print("Podaj nazwï¿½: ");c = in.readLine(); 
 	System.out.print("Podaj opis: ");b = in.readLine();
 	// dodanie elementu do listy produktï¿½w
 	try {
-		products.set(f,new Product(a,b));
+		
+		products.set(f,new Product(c,b));
 	  } catch (ArrayIndexOutOfBoundsException e) {
 		  
 		  System.out.println("Niepoprawny parametr, rozmiar tablicy to: "+ products.size());
-		  logger.error("Za duzy index list "+ fa +" gdzie lista ma rozmiar"+ products.size());
+		  logger.error("Za duzy index list "+ a +" gdzie lista ma rozmiar"+ products.size());
 	  }
 }
 	
@@ -123,80 +124,54 @@ public static void addProduct(ArrayList<Product> products) throws IOException{
 	
 	
 		
-		public static int search(ArrayList<Person> Persons, ArrayList<Product> products) throws IOException {
-			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		public static Object searchPerson(ArrayList<Person> Persons, String a) throws IOException {
 			
-			String a = null;
 			
-			System.out.println("Podaj wyszukiwany element: ");
-			a = in.readLine();
+			
 		             int pozycja = 0;
 		
 		             for(Person g : Persons) {
 		                     if (g.getImie().contains(a)) {
-		                             System.out.println("Osoba o imieniu: " + g.getImie() + " znajduje siï¿½ na pozycji " + pozycja + ". Na liï¿½cie Osï¿½b" ); g.printPerson(); 
+		                             System.out.println("Osoba o imieniu: " + g.getImie() + " znajduje siï¿½ na pozycji " + pozycja + ". Na liï¿½cie Osï¿½b" ); g.printPerson();
+		                             return g;
 		                     }
 		                     else if (g.getNazwisko().contains(a)) {
 		                    	 System.out.println("Osoba o nazwisku: " + g.getNazwisko() + " znajduje siï¿½ na pozycji " + pozycja + ". Na liï¿½cie Osï¿½b"); g.printPerson();
+		                    	 return g;
 		                     }
 		                     
 		                     pozycja++;
 		             }
-		             pozycja = 0;
+		             return null;
+		}  
+		             public static Object searchProduct(ArrayList<Product> products, String a) throws IOException {
+		             int pozycja = 0;
 		             for(Product c : products) {
 		            	 if (c.getName().contains(a)) {
 		                     System.out.println("Produkt o Nazwie: " + c.getName() + " znajduje siï¿½ na pozycji " + pozycja + ". Na liï¿½cie Produktï¿½w" ); c.printProduct(); 
+		                     return c;
 		             }
 		             else if (c.getInformation().contains(a)) {
 		            	 System.out.println("Produkt gdzie w opisie zawarte jest sï¿½owo: " + c.getInformation() + " znajduje siï¿½ na pozycji " + pozycja + ". Na liï¿½cie Produktï¿½w" ); c.printProduct();
+		            	 return c;
 		             }
 		             
 		             pozycja++;
 		             }
-		           return pozycja;
-		   
-		}
-		public static void delete(ArrayList<Person> Persons, ArrayList<Product> products) throws IOException{
-			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-			
-			
-			String a = null;
-			
+		             return null;
+		             }    
+		             
 		
-			System.out.println("Podaj element ktory chcesz usunac: ");
-			try
-			{
-				a = in.readLine(); 
-				
-				  
-			}
-			 catch(Wyjatek e) 
-			   { 
-				logger.error("Wyj¹tek: "+e.getMessage());
-			}
-			
-		             int pozycja = 0;
-		             for(Person g : Persons) {
-		                     if (g.getImie().equals(a)) {
-		                             System.out.println("Osoba o imieniu: " + g.getImie() + " znajdowaï¿½a siï¿½ na pozycji: " + pozycja + ". Na liï¿½cie Osï¿½b " ); g.printPerson(); Persons.remove(pozycja);
-		                             System.out.println("Zostaï¿½ on usuniï¿½ty!!"); break;
-		                     }
-		                     else if (g.getNazwisko().equals(a)) {
-		                    	 System.out.println("Osoba o nazwisku: " + g.getNazwisko() + " znajdowaï¿½a siï¿½ na pozycji: " + pozycja + ". Na liï¿½cie Osï¿½b "); g.printPerson(); Persons.remove(pozycja);
-		                    	 System.out.println("Zostaï¿½ on usuniï¿½ty!!"); break;
-		                     }
-		                     
-		                     pozycja++;
+		public static void deletePerson(ArrayList<Person> Persons, String a) throws IOException{
+					            		           
+		                     Persons.remove(searchPerson(Persons, a));
+		                     		                    
+		                
 		             }
-		             pozycja = 0;
-		             for(Product c : products) {
-		            	 if (c.getName().equals(a)) {
-		                     System.out.println("Produkt o Nazwie: " + c.getName() + " znajdowaï¿½ siï¿½ na pozycji " + pozycja + ". Na liï¿½cie Produktï¿½w"); c.printProduct(); products.remove(pozycja);
-		                     System.out.println("Zostaï¿½ on usuniï¿½ty!!"); break;
-		             }
-		             
-		             
-		             pozycja++;
-		             }
+		public static void deleteProduct(ArrayList<Product> products, String a) throws IOException{
+	           
+            products.remove(searchProduct(products, a));
+            		                    
+       
+    }
 		}
-}
