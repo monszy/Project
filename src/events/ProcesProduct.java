@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.pl.monszy.*;
 
-public class MasterOfProduct {
+public class ProcesProduct {
 
 	private Product Product;
 

@@ -40,7 +40,7 @@ public class Main {
 		Persons.add(new Person("Gabrys", "Szmel"));
 
 		IProductProcesses backupProduct = new BackupProduct();
-		MasterOfProduct masterOfProduct = new MasterOfProduct();
+		ProcesProduct procesProduct = new ProcesProduct();
 		IProductProcesses cleanProductBox = new CleanProductBox();
 		IProductProcesses changeProductBox = new ChangeProductBox();
 
@@ -54,10 +54,10 @@ public class Main {
 		System.out.println("Kojiak Backup game before - "
 				+ Product.equalProduct(products, "Kojiak").get(0).isBackup());
 
-		masterOfProduct.addProcess(cleanProductBox);
-		masterOfProduct.addProcess(changeProductBox);
-		masterOfProduct.addProcess(backupProduct);
-		masterOfProduct.executeProcesses(Product.equalProduct(products,
+		procesProduct.addProcess(cleanProductBox);
+		procesProduct.addProcess(changeProductBox);
+		procesProduct.addProcess(backupProduct);
+		procesProduct.executeProcesses(Product.equalProduct(products,
 				"Kojiak"));
 		System.out.println("Kojiak Clen box after - "
 				+ Product.equalProduct(products, "Kojiak").get(0).isCleanBox());
