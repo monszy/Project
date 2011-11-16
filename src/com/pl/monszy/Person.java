@@ -89,7 +89,8 @@ public class Person {
 	}
 
 	public static void showlistperson(ArrayList<Person> Persons) {
-		Product d = new Product("Film", "best film ever", Persons);
+		Product d = new Product("Film", "best film ever", ProductType.Camera,
+				Persons);
 		d.printPersons();
 	}
 
@@ -104,7 +105,8 @@ public class Person {
 		int f = 0;
 
 		for (int i = 1; i <= fc; i++) {
-			System.out.println("Podaj element ktory chcesz edytowac na liscie osob: ");
+			System.out
+					.println("Podaj element ktory chcesz edytowac na liscie osob: ");
 			a = in.readLine();
 			if ((equalPerson(Persons, a)) == null)
 				System.out.println("nie ma takiej osoby na liscie");

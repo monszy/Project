@@ -9,11 +9,14 @@ import java.util.List;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
+import com.pl.monszy.*;
+
 public class Product {
 	private static Logger logger = Logger.getLogger(Main.class);
 
 	public String name;
 	public String information;
+	public ProductType productType;
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 	String choiceString;
@@ -22,14 +25,24 @@ public class Product {
 	String fa = null;
 	int f = 0;
 	int choice;
+	public boolean backup;
+	public boolean cleanBox;
+	public String ProductBoxColor;
 
-	public Product(String name, String information) {
-		PropertyConfigurator.configure("Log4J.properties");
+	public Product(String name, String information, ProductType productType) {
+
+		this.productType = productType;
 		this.name = name;
 		this.information = information;
 	}
 
-	public Product(String name, String information, ArrayList<Person> Persons) {
+	public Product(String name, String information, ProductType productType,
+			ArrayList<Person> Persons) {
+		PropertyConfigurator.configure("Log4J.properties");
+		this.cleanBox = true;
+		this.backup = false;
+		this.ProductBoxColor = "white";
+		this.productType = productType;
 		this.name = name;
 		this.information = information;
 		this.Persons = Persons;
@@ -84,13 +97,15 @@ public class Product {
 		logger.info("dodales produkt");
 		String a = null;
 		String b = null;
-
+		ProductType c = null;
 		System.out.print("Podaj nazwe: ");
 		a = in.readLine();
 		System.out.print("Podaj opis: ");
 		b = in.readLine();
+		System.out.print("Podaj typ produktu: ");
+		c = ProductType.valueOf(in.readLine());
 		// dodanie elementu do listy produkt�w
-		products.add(new Product(a, b));
+		products.add(new Product(a, b, c));
 	}
 
 	public static void editlistproducts(ArrayList<Product> products, int fc)
@@ -101,6 +116,7 @@ public class Product {
 		String a = null;
 		String b = null;
 		String c = null;
+		ProductType d = null;
 		int f = 0;
 
 		for (int i = 1; i <= fc; i++) {
@@ -117,10 +133,12 @@ public class Product {
 				c = in.readLine();
 				System.out.print("Podaj opis: ");
 				b = in.readLine();
+				System.out.print("Podaj typ: ");
+				d = ProductType.valueOf(in.readLine());
 				// dodanie elementu do listy produkt�w
 				try {
 
-					products.set(f, new Product(c, b));
+					products.set(f, new Product(c, b, d));
 				} catch (ArrayIndexOutOfBoundsException e) {
 
 					System.out
@@ -141,8 +159,11 @@ public class Product {
 		System.out.println("Size the list of persons: " + Persons.size());
 	}
 
-	public static Object searchProduct(ArrayList<Product> products, String a)
-			throws IOException {
+	public static List<Product> searchProduct(ArrayList<Product> products,
+			String a) throws IOException {
+
+		List<Product> results = new ArrayList<Product>();
+
 		int pozycja = 0;
 		for (Product c : products) {
 			if (c.getName().contains(a)) {
@@ -150,7 +171,8 @@ public class Product {
 						+ " znajduje sie na pozycji " + pozycja
 						+ ". Na liscie Produktow");
 				c.printProduct();
-				return c;
+				results.add(c);
+				return results;
 			} else if (c.getInformation().contains(a)) {
 				System.out
 						.println("Produkt gdzie w opisie zawarte jest slowo: "
@@ -158,23 +180,38 @@ public class Product {
 								+ " znajduje sie na pozycji " + pozycja
 								+ ". Na liscie Produktow");
 				c.printProduct();
-				return c;
-			}
+				results.add(c);
+				return results;
+			} else if (c.getProductType().equals(a)) {
+				System.out.println("Produkt typu: " + c.getProductType()
+						+ " znajduje sie na pozycji " + pozycja
+						+ ". Na liscie Produktow");
+				c.printProduct();
+				results.add(c);
+				return results;
 
+			}
 			pozycja++;
 		}
 		return null;
 	}
 
-	public static Object equalProduct(ArrayList<Product> products, String a)
-			throws IOException {
+	public static List<Product> equalProduct(ArrayList<Product> products,
+			String a) throws IOException {
+
+		List<Product> results = new ArrayList<Product>();
+
 		for (Product c : products) {
 			if (c.getName().contains(a)) {
-
-				return c;
+				results.add(c);
+				return results;
 			} else if (c.getInformation().contains(a)) {
+				results.add(c);
+				return results;
+			} else if (c.getProductType().equals(a)) {
+				results.add(c);
+				return results;
 
-				return c;
 			}
 		}
 		return null;
@@ -185,5 +222,37 @@ public class Product {
 
 		products.remove(searchProduct(products, a));
 
+	}
+
+	public boolean isBackup() {
+		return backup;
+	}
+
+	public void setBackup(boolean backup) {
+		this.backup = backup;
+	}
+
+	public boolean isCleanBox() {
+		return cleanBox;
+	}
+
+	public void setCleanBox(boolean cleanBox) {
+		this.cleanBox = cleanBox;
+	}
+
+	public String getProductBoxColor() {
+		return ProductBoxColor;
+	}
+
+	public void setProductBoxColor(String ProductBoxColor) {
+		this.ProductBoxColor = ProductBoxColor;
+	}
+
+	public ProductType getProductType() {
+		return productType;
+	}
+
+	public void setProductType(ProductType productType) {
+		this.productType = productType;
 	}
 }

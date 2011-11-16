@@ -2,9 +2,11 @@ package com.pl.monszy;
 
 import java.io.*;
 import java.util.*;
+
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 import com.pl.monszy.Wyjatek;
+import events.*;
 
 public class Main {
 	private static Logger logger = Logger.getLogger(Main.class);
@@ -22,13 +24,42 @@ public class Main {
 		int fc = 0;
 
 		ArrayList<Product> products = new ArrayList<Product>();
-		products.add(new Product("Film", "best film ever"));
-		products.add(new Product("Koadak", "some best film"));
-		products.add(new Product("Fuji", "p"));
+		products.add(new Product("Kojiak", "best film ever", ProductType.Film));
+		products.add(new Product("Koadak", "some best film", ProductType.Camera));
+		products.add(new Product("Alpina", "best camera in the world",
+				ProductType.Camera));
 
 		ArrayList<Person> Persons = new ArrayList<Person>();
 		Persons.add(new Person("Jan", "Nowak"));
 		Persons.add(new Person("Gabrys", "Szmel"));
+
+		IProductProcesses backupProduct = new BackupProduct();
+		MasterOfProduct masterOfProduct = new MasterOfProduct();
+		IProductProcesses cleanProductBox = new CleanProductBox();
+		IProductProcesses changeProductBox = new ChangeProductBox();
+
+		System.out.println("Product processes Film type");
+		Product.equalProduct(products, "Film").get(0).setCleanBox(false);
+		System.out.println("Kojiak Clen box before - "
+				+ Product.equalProduct(products, "Film").get(0).isCleanBox());
+		System.out.println("Kojiak Color box before - "
+				+ Product.equalProduct(products, "Film").get(0)
+						.getProductBoxColor());
+		System.out.println("Kojiak Backup game before - "
+				+ Product.equalProduct(products, "Kojiak").get(0).isBackup());
+
+		masterOfProduct.addProcess(cleanProductBox);
+		masterOfProduct.addProcess(changeProductBox);
+		masterOfProduct.addProcess(backupProduct);
+		masterOfProduct.executeProcesses(Product.equalProduct(products,
+				"Film"));
+		System.out.println("Kojiak Clen box after - "
+				+ Product.equalProduct(products, "Kojiak").get(0).isCleanBox());
+		System.out.println("Kojiak Color box after - "
+				+ Product.equalProduct(products, "Kojiak").get(0)
+						.getProductBoxColor());
+		System.out.println("Kojiak Backup game after - "
+				+ Product.equalProduct(products, "Kojiak").get(0).isBackup());
 
 		do {
 			pouse.Sec(4);
@@ -43,21 +74,13 @@ public class Main {
 			System.out.println("6. edycja elementow na liscie produktow");
 			System.out.println("7. edycja elementow na liscie osob");
 			System.out.println("8. Wyszukiwanie elementow w listach");
-			System.out.println("9. usuniecie wiersza zawierajacego podany element");
+			System.out
+					.println("9. usuniecie wiersza zawierajacego podany element");
 			System.out.println("10. Quit");
 			System.out.println("Co wybierasz? : ");
 			System.out.flush();
 			choiceString = in.readLine();
 
-			try {
-				choice = Integer.parseInt(choiceString);
-				throw new Wyjatek("Int?");
-
-			} catch (Exception e) {
-
-				logger.error("Wyjatek, musisz podac inta a nie...: "
-						+ e.getMessage());
-			}
 			choice = Integer.parseInt(choiceString);
 			switch (choice) {
 
