@@ -1,6 +1,6 @@
 package com.pl.monszy;
 
-import com.pl.monszy.Wyjatek;
+import com.pl.monszy.PriceException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,14 +9,13 @@ import java.util.List;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
-import com.pl.monszy.*;
-
 public class Product {
 	private static Logger logger = Logger.getLogger(Main.class);
 
 	public String name;
 	public String information;
 	public ProductType productType;
+	public int Price;
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 	String choiceString;
@@ -29,15 +28,17 @@ public class Product {
 	public boolean cleanBox;
 	public String ProductBoxColor;
 
-	public Product(String name, String information, ProductType productType) {
+	public Product(String name, String information, ProductType productType,
+			int Price) throws PriceException {
 
 		this.productType = productType;
 		this.name = name;
 		this.information = information;
+		this.Price = Price;
 	}
 
 	public Product(String name, String information, ProductType productType,
-			ArrayList<Person> Persons) {
+			int Price, ArrayList<Person> Persons) throws PriceException {
 		PropertyConfigurator.configure("Log4J.properties");
 		this.cleanBox = true;
 		this.backup = false;
@@ -46,10 +47,12 @@ public class Product {
 		this.name = name;
 		this.information = information;
 		this.Persons = Persons;
+		this.Price = Price;
 	}
 
 	public void printProduct() {
-		System.out.println("name: " + name + "\t information: " + information);
+		System.out.println("name: " + name + "\t information: " + information
+				+ "\t Product type: " + productType + "\t Cena: " + Price);
 	}
 
 	public List<Person> Persons = new ArrayList<Person>();
@@ -92,24 +95,29 @@ public class Product {
 	}
 
 	public static void addProduct(ArrayList<Product> products)
-			throws IOException {
+			throws IOException, PriceException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		logger.info("dodales produkt");
-		String a = null;
-		String b = null;
-		ProductType c = null;
+		String name = null;
+		String description = null;
+		ProductType type = null;
+		int price = 0;
+		String strprice = null;
 		System.out.print("Podaj nazwe: ");
-		a = in.readLine();
+		name = in.readLine();
 		System.out.print("Podaj opis: ");
-		b = in.readLine();
+		description = in.readLine();
 		System.out.print("Podaj typ produktu: ");
-		c = ProductType.valueOf(in.readLine());
+		type = ProductType.valueOf(in.readLine());
+		System.out.print("Podaj cene produktu: ");
+		strprice = in.readLine();
+		price = Integer.parseInt(strprice);
 		// dodanie elementu do listy produkt�w
-		products.add(new Product(a, b, c));
+		products.add(new Product(name, description, type, price));
 	}
 
 	public static void editlistproducts(ArrayList<Product> products, int fc)
-			throws IOException {
+			throws IOException, PriceException {
 		PropertyConfigurator.configure("Log4J.properties");
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
@@ -135,10 +143,13 @@ public class Product {
 				b = in.readLine();
 				System.out.print("Podaj typ: ");
 				d = ProductType.valueOf(in.readLine());
+				System.out.print("Podaj cene produktu: ");
+				String strprice = in.readLine();
+				int price = Integer.parseInt(strprice);
 				// dodanie elementu do listy produkt�w
 				try {
 
-					products.set(f, new Product(c, b, d));
+					products.set(f, new Product(c, b, d, price));
 				} catch (ArrayIndexOutOfBoundsException e) {
 
 					System.out
@@ -182,7 +193,7 @@ public class Product {
 				c.printProduct();
 				results.add(c);
 				return results;
-			} else if (c.getProductType().equals(a)) {
+			} else if (c.getProductType().equals(ProductType.valueOf(a))) {
 				System.out.println("Produkt typu: " + c.getProductType()
 						+ " znajduje sie na pozycji " + pozycja
 						+ ". Na liscie Produktow");
@@ -191,6 +202,7 @@ public class Product {
 				return results;
 
 			}
+
 			pozycja++;
 		}
 		return null;
@@ -254,5 +266,13 @@ public class Product {
 
 	public void setProductType(ProductType productType) {
 		this.productType = productType;
+	}
+
+	public int getPrice() {
+		return Price;
+	}
+
+	public void setPrice(int price) {
+		Price = price;
 	}
 }

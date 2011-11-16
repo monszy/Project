@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
+
+
 public class Person {
 	private static Logger logger = Logger.getLogger(Main.class);
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -24,6 +26,15 @@ public class Person {
 		PropertyConfigurator.configure("Log4J.properties");
 		this.imie = imie;
 		this.nazwisko = nazwisko;
+	}
+	public void addProduct(String name, String information, ProductType productType, 
+			int price) throws PriceException {
+		if (price > 0) {
+			products.add(new Product(name, information,productType, price));
+			logger.info("Game: " + name + " - added");
+		}
+		if (price <= 0)
+			throw new PriceException("Price cannot by less than 0");
 	}
 
 	public Person(String imie, String nazwisko, ArrayList<Product> products) {
@@ -88,8 +99,8 @@ public class Person {
 		Persons.add(new Person(a, b));
 	}
 
-	public static void showlistperson(ArrayList<Person> Persons) {
-		Product d = new Product("Film", "best film ever", ProductType.Camera,
+	public static void showlistperson(ArrayList<Person> Persons) throws PriceException {
+		Product d = new Product("Film", "best film ever", ProductType.Camera, 10,
 				Persons);
 		d.printPersons();
 	}

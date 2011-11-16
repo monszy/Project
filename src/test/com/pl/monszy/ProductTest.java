@@ -2,9 +2,33 @@ package test.com.pl.monszy;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import java.util.ArrayList;
+
+import org.junit.*;
+
+import com.pl.monszy.*;
 
 public class ProductTest {
+
+	Person person = new Person("Szymon", "Stasiak");
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		person.addProduct("Fuji", "Dobry film nie jest z³y", ProductType.Film,
+				10);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
 
 	@Test
 	public void testProductStringStringProductType() {
@@ -28,22 +52,25 @@ public class ProductTest {
 
 	@Test
 	public void testGetName() {
-		fail("Not yet implemented");
+		assertTrue(person.getProducts().get(0).getName().equals("Kojiak"));
 	}
 
 	@Test
 	public void testSetName() {
-		fail("Not yet implemented");
+		person.getProducts().get(0).setName("Kojiak");
+		assertTrue(person.getProducts().get(0).getName().equals("Kojiak"));
 	}
 
 	@Test
 	public void testGetInformation() {
-		fail("Not yet implemented");
+		assertTrue(person.getProducts().get(0).getInformation()
+				.equals("best film ever"));
 	}
 
 	@Test
 	public void testSetInformation() {
-		fail("Not yet implemented");
+		person.getProducts().get(0).setInformation("best film");
+		assertTrue(person.getProducts().get(0).getInformation().equals("best film"));
 	}
 
 	@Test

@@ -5,13 +5,13 @@ import java.util.*;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
-import com.pl.monszy.Wyjatek;
+import com.pl.monszy.PriceException;
 import events.*;
 
 public class Main {
 	private static Logger logger = Logger.getLogger(Main.class);
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, PriceException {
 		PropertyConfigurator.configure("Log4J.properties");
 
 		// tworzenie biektu do odczytania z consoli (bufferedReader)
@@ -24,10 +24,16 @@ public class Main {
 		int fc = 0;
 
 		ArrayList<Product> products = new ArrayList<Product>();
-		products.add(new Product("Kojiak", "best film ever", ProductType.Film));
-		products.add(new Product("Koadak", "some best film", ProductType.Camera));
-		products.add(new Product("Alpina", "best camera in the world",
-				ProductType.Camera));
+		try {
+			products.add(new Product("Kojiak", "best film ever",
+					ProductType.Film, 10));
+			products.add(new Product("Koadak", "some best film",
+					ProductType.Camera, 40));
+			products.add(new Product("Alpina", "best camera in the world",
+					ProductType.Camera, 120));
+		} catch (PriceException exception) {
+			logger.error(exception);
+		}
 
 		ArrayList<Person> Persons = new ArrayList<Person>();
 		Persons.add(new Person("Jan", "Nowak"));
@@ -39,11 +45,11 @@ public class Main {
 		IProductProcesses changeProductBox = new ChangeProductBox();
 
 		System.out.println("Product processes Film type");
-		Product.equalProduct(products, "Film").get(0).setCleanBox(false);
+		Product.equalProduct(products, "Kojiak").get(0).setCleanBox(false);
 		System.out.println("Kojiak Clen box before - "
-				+ Product.equalProduct(products, "Film").get(0).isCleanBox());
+				+ Product.equalProduct(products, "Kojiak").get(0).isCleanBox());
 		System.out.println("Kojiak Color box before - "
-				+ Product.equalProduct(products, "Film").get(0)
+				+ Product.equalProduct(products, "Kojiak").get(0)
 						.getProductBoxColor());
 		System.out.println("Kojiak Backup game before - "
 				+ Product.equalProduct(products, "Kojiak").get(0).isBackup());
@@ -52,7 +58,7 @@ public class Main {
 		masterOfProduct.addProcess(changeProductBox);
 		masterOfProduct.addProcess(backupProduct);
 		masterOfProduct.executeProcesses(Product.equalProduct(products,
-				"Film"));
+				"Kojiak"));
 		System.out.println("Kojiak Clen box after - "
 				+ Product.equalProduct(products, "Kojiak").get(0).isCleanBox());
 		System.out.println("Kojiak Color box after - "
