@@ -20,11 +20,12 @@ public class PersonTest {
 	ArrayList<Product> products = new ArrayList<Product>();
 	@Before
 	public void setUp() throws Exception {
-		Persons.add(new Person("Szymon", "Stasiak"));
+		
 		products.add(new Product("Kojiak", "best film ever",
 				ProductType.Film, 10));
 		products.add(new Product("Fuji", "so hard",
 				ProductType.Camera, 120));
+		Persons.add(new Person("Szymon", "Stasiak", products));
 	}
 
 	@After

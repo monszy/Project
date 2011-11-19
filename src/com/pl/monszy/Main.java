@@ -22,7 +22,7 @@ public class Main {
 		String a = null;
 		String fb = null;
 		int fc = 0;
-
+		ArrayList<Product> AryProducts = new ArrayList<Product>();
 		ArrayList<Product> products = new ArrayList<Product>();
 		try {
 			products.add(new Product("Kojiak", "best film ever",
@@ -36,8 +36,8 @@ public class Main {
 		}
         
 		ArrayList<Person> Persons = new ArrayList<Person>();
-		Persons.add(new Person("Jan", "Nowak"));
-		Persons.add(new Person("Gabrys", "Szmel"));
+		Persons.add(new Person("Jan", "Nowak", products));
+		Persons.add(new Person("Gabrys", "Szmel", products));
 
 		IProductProcesses backupProduct = new BackupProduct();
 		ProcesProduct procesProduct = new ProcesProduct();
@@ -110,13 +110,13 @@ public class Main {
 			case 3:
 				// wy�wietlenie listy produkt�w
 				Product.showlistproducts(products);
-				
+				Person.showlistPerson(Persons);
 				break;
 			case 4:
 				Person.addPerson(Persons);
 				break;
 			case 5:
-				Product.addProduct(products);
+				Product.addProduct(products, AryProducts);
 				break;
 			case 6:
 

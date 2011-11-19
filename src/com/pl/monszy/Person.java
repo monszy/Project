@@ -31,18 +31,34 @@ public class Person {
 	}
 	
 
-	public Person(String imie, String nazwisko, ArrayList<Product> products) {
+	public Person(String imie, String nazwisko, ArrayList<Product> AryProducts) {
 		PropertyConfigurator.configure("Log4J.properties");
 		this.imie = imie;
 		this.nazwisko = nazwisko;
-		Person.products = products;
+		Person.products = AryProducts;
 	}
 
 	public void printPerson() {
-		System.out.println("imie: " + imie + "\t nazwisko: " + nazwisko + "\t produkty: " + products);
+		System.out.println("imie: " + imie + "\t nazwisko: " + nazwisko + "\t produkty: " + Person.products);
 	}
+	public static ArrayList<Person> Persons= new ArrayList<Person>();
+	public void printPersons() {
+		
+		int pozycja = 1;
+		for (Person c : Persons)
 
+		{
+			System.out.print(pozycja + " ");
+			c.printPerson();
+			pozycja++;
+		}
+	}
 	
+	public static void showlistPerson(ArrayList<Person> Persons) {
+		Person o = new Person("Jan", "Nowak", products);
+		o.printPersons();
+		logger.info("wyswietliles produkty");
+	}
 	
 	
 	
@@ -82,20 +98,28 @@ public class Person {
 		Person.products = products;
 	}
 
-	public static void addPerson(ArrayList<Person> Persons) throws IOException {
+	public static void addPerson(ArrayList<Person> Persons) throws IOException, PriceException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		//ArrayList<Product> Produkciki;
+		ArrayList<Product> AryProducts = new ArrayList<Product>();
 		String a = null;
 		String b = null;
-
+		String sizestr = null;
+		
 		System.out.print("Podaj imie: ");
 		a = in.readLine();
 		System.out.print("Podaj nazwisko: ");
 		b = in.readLine();
-	//	Product.showlistproducts(products);
+		System.out.print("Ile produktow chcesz dodac do listy tej osoby? ");
+		sizestr = in.readLine();
+		int size = Integer.parseInt(sizestr);
+		for (int i = 1; i <= size; i++){
+		System.out.print("Podaj " + i +" product");
+		Product.addProduct(AryProducts, products);
 		
+		}
 		// dodanie element�w do listy os�b
-		Persons.add(new Person(a, b));
+		
+		Persons.add(new Person(a, b, AryProducts));
 	}
 	
 		

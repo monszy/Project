@@ -88,7 +88,7 @@ public class Product {
 		logger.info("wyswietliles produkty");
 	}
 
-	public static void addProduct(ArrayList<Product> products)
+	public static void addProduct(ArrayList<Product> products, ArrayList<Product> AryProducts)
 			throws IOException, PriceException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		logger.info("dodales produkt");
@@ -109,6 +109,7 @@ public class Product {
 		if (price > 0) {
 		// dodanie elementu do listy produkt�w
 		products.add(new Product(name, description, type, price));
+		AryProducts.add(new Product(name, description, type, price));
 		logger.info("Product: " + name + " - added");
 		}
 		if (price <= 0)
