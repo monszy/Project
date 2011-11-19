@@ -8,7 +8,7 @@ public class ProcesProduct {
 
 	private Product Product;
 
-	private List processes = new ArrayList();
+	private List<IProductProcesses> processes = new ArrayList<IProductProcesses>();
 
 	public Product getGame() {
 		return Product;
@@ -30,7 +30,7 @@ public class ProcesProduct {
 		for (Product Product : list) {
 			setProduct(Product);
 			ProductEvent event = new ProductEvent(this, Product);
-			Iterator proc = processes.iterator();
+			Iterator<IProductProcesses> proc = processes.iterator();
 			while (proc.hasNext()) {
 				((IProductProcesses) proc.next()).processProduct(event);
 			}

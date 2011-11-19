@@ -6,7 +6,6 @@ import java.util.*;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 import com.pl.monszy.PriceException;
-import com.pl.monszy.Product;
 import events.*;
 
 public class Main {
@@ -74,15 +73,14 @@ public class Main {
 
 			System.out.println("\n---------- Menu------------");
 			System.out.println("1. Wyswietl wielkosc list");
-			System.out.println("2. Wyswietlenie listy osob");
+			System.out.println("2. Wyszukiwanie elementow w listach");
 			System.out.println("3. Wyswietlenie listy produktow");
 			System.out.println("4. dodanie elementow do listy osob");
 			System.out.println("5. dodanie elementow do listy produktow");
 			System.out.println("6. edycja elementow na liscie produktow");
-			System.out.println("7. edycja elementow na liscie osob");
-			System.out.println("8. Wyszukiwanie elementow w listach");
+			System.out.println("7. edycja elementow na liscie osob");			
 			System.out
-					.println("9. usuniecie wiersza zawierajacego podany element");
+					.println("8. usuniecie wiersza zawierajacego podany element");
 			System.out.println("10. Quit");
 			System.out.println("Co wybierasz? : ");
 			System.out.flush();
@@ -96,15 +94,25 @@ public class Main {
 				Product.showsize(Persons, products);
 				break;
 			case 2:
-				// wy�wietlenie listy Os�b
-				Person.showlistperson(Persons);
+				System.out.println("Podaj wyszukiwany element: ");
+				a = in.readLine();
+				System.out
+						.println("Na ktorej z list chcesz go wyszukiwac? \n1. Lista Produktow \n2. Lista osob: ");
+				fb = in.readLine();
+				fc = Integer.parseInt(fb);
+				if (fc == 1) {
+					Product.searchProduct(products, a);
+				} else {
+					Person.searchPerson(Persons, a);
+				}
+				
 				break;
 			case 3:
 				// wy�wietlenie listy produkt�w
 				Product.showlistproducts(products);
 				break;
 			case 4:
-				Person.addPerson(Persons);
+				Person.showlistperson(Persons);
 				break;
 			case 5:
 				Product.addProduct(products);
@@ -123,21 +131,8 @@ public class Main {
 				fc = Integer.parseInt(fb);
 				Person.editlistPersons(Persons, fc);
 				break;
+			
 			case 8:
-
-				System.out.println("Podaj wyszukiwany element: ");
-				a = in.readLine();
-				System.out
-						.println("Na ktorej z list chcesz go wyszukiwac? \n1. Lista Produktow \n2. Lista osob: ");
-				fb = in.readLine();
-				fc = Integer.parseInt(fb);
-				if (fc == 1) {
-					Product.searchProduct(products, a);
-				} else {
-					Person.searchPerson(Persons, a);
-				}
-				break;
-			case 9:
 
 				System.out
 						.println("Z ktorej z list chcesz usunac? \n1. Lista produktow \n2. Lista osob: ");
@@ -147,12 +142,13 @@ public class Main {
 					System.out
 							.println("Podaj element ktory chcesz usunac z listy produktow: ");
 					a = in.readLine();
-					Person.deletePerson(Persons, a);
+					Product.deleteProduct(products, a);
+					
 				} else {
 					System.out
 							.println("Podaj element ktory chcesz usunac z listy osob: ");
 					a = in.readLine();
-					Product.deleteProduct(products, a);
+					Person.deletePerson(Persons, a);
 
 				}
 

@@ -93,11 +93,14 @@ public class Person {
 		// dodanie element�w do listy os�b
 		Persons.add(new Person(a, b));
 	}
+	
 
 	public static void showlistperson(ArrayList<Person> Persons) throws PriceException {
-		Product d = new Product("Kojiak", "best film ever",
-				ProductType.Film, 10, Persons);
-		d.printPersons();
+		
+		Product d= new Product("Film","best film ever",ProductType.Camera, 10
+			, Persons);
+		d.printPersons(); 
+		
 		logger.info("wyswietliles Osob");
 	}
 		

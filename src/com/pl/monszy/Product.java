@@ -29,7 +29,7 @@ public class Product {
 	public int ProductPrice;
 
 	public Product(String name, String information, ProductType productType,
-			int Price) throws PriceException {
+			double Price) throws PriceException {
 
 		this.productType = productType;
 		this.name = name;
@@ -38,7 +38,7 @@ public class Product {
 	}
 
 	public Product(String name, String information, ProductType productType,
-			int Price, ArrayList<Person> Persons) throws PriceException {
+			double Price, ArrayList<Person> Persons) throws PriceException {
 		PropertyConfigurator.configure("Log4J.properties");
 		this.Discount = true;
 		this.backup = false;
@@ -73,18 +73,12 @@ public class Product {
 	public void setInformation(String information) {
 		this.information = information;
 	}
-	public ArrayList<Person> Persons = new ArrayList<Person>();
-
-	
-	public void printPersons() {
-		int pozycja = 1;
-		for (Person c : this.Persons)
-
-		{
-			System.out.print(pozycja + " ");
-			c.printPerson();
-			pozycja++;
-		}
+	public List<Person> Persons= new ArrayList<Person>();
+	public void printPersons(){
+	for(Person g : this.Persons)
+	{
+	g.printPerson();
+	}
 	}
 	
 
@@ -115,7 +109,7 @@ public class Product {
 		if (price > 0) {
 		// dodanie elementu do listy produkt�w
 		products.add(new Product(name, description, type, price));
-		logger.info("Game: " + name + " - added");
+		logger.info("Product: " + name + " - added");
 		}
 		if (price <= 0)
 			throw new PriceException("Price cannot by less than 0");
@@ -143,7 +137,7 @@ public class Product {
 				System.out.println("nie ma takiego produktu na liscie");
 			else {
 
-				f = products.indexOf(searchProduct(products, a));
+				f = products.indexOf(searchProduct(products, a))+1;
 
 				System.out.print("Podaj nazwe: ");
 				c = in.readLine();
@@ -154,6 +148,7 @@ public class Product {
 				System.out.print("Podaj cene produktu: ");
 				String strprice = in.readLine();
 				int price = Integer.parseInt(strprice);
+				
 				// dodanie elementu do listy produkt�w
 				try {
 
@@ -169,7 +164,7 @@ public class Product {
 			}
 
 			logger.info("zedytowales liste produktow");
-		}
+			}
 	}
 
 	public static void showsize(ArrayList<Person> Persons,
@@ -239,8 +234,9 @@ public class Product {
 
 	public static void deleteProduct(ArrayList<Product> products, String a)
 			throws IOException {
-
-		products.remove(searchProduct(products, a));
+		int f = products.indexOf(searchProduct(products, a))+1;
+		System.out.println(f);
+		products.remove(f);
 
 	}
 
@@ -264,7 +260,7 @@ public class Product {
 		return ProductPrice;
 	}
 
-	public void setProductPrice(int i) {
+	public void setProductPrice(int ProductPrice) {
 		this.ProductPrice = ProductPrice;
 	}
 

@@ -2,6 +2,7 @@ package test.com.pl.monszy;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.*;
@@ -59,77 +60,114 @@ public class ProductTest {
 
 	@Test
 	public void testShowlistproducts() {
-		
+		Person o = new Person("Jan", "Nowak", products);
+		o.printProducts();		
 	}
 
 	@Test
 	public void testAddProduct() {
-		fail("Not yet implemented");
+		assertTrue(products.size() == 1);
 	}
-
-	@Test
-	public void testEditlistproducts() {
-		fail("Not yet implemented");
-	}
+	
+	/*@Test
+	public void testEditlistproducts() throws PriceException, IOException {
+		
+		System.out.println("Przy zmianie prosze podac cene 12 aby test przeszedl poprawnie");
+		Product.editlistproducts(products, 1);		
+		assertTrue(products.get(0).getPrice() == 12);
+			
+	}*/
 
 	@Test
 	public void testShowsize() {
-		fail("Not yet implemented");
+		assertTrue(products.size() == 1);
+		
 	}
 
 	@Test
-	public void testSearchProduct() {
-		fail("Not yet implemented");
+	public void testSearchProduct() throws IOException {
+		assertNotNull(products.get(0));
+		assertEquals(products.get(0).getName(), (Product.searchProduct(products, "Kojiak")).get(0).getName());
+		assertSame(products.get(0).getName(), (Product.searchProduct(products, "Kojiak")).get(0).getName());
+		assertEquals(products.get(0).getInformation(), (Product.searchProduct(products, "Kojiak")).get(0).getInformation());
+		assertSame(products.get(0).getProductPrice(), (Product.searchProduct(products, "Kojiak")).get(0).getProductPrice());
+		assertEquals(products.get(0).getProductType(), (Product.searchProduct(products, "Kojiak")).get(0).getProductType());
 	}
 
 	@Test
-	public void testEqualProduct() {
-		fail("Not yet implemented");
+	public void testEqualProduct() throws IOException {
+		assertNotNull(products.get(0));
+		assertEquals(products.get(0).getName(), (Product.equalProduct(products, "Kojiak")).get(0).getName());
+		assertSame(products.get(0).getName(), (Product.equalProduct(products, "Kojiak")).get(0).getName());
+		assertEquals(products.get(0).getInformation(), (Product.equalProduct(products, "Kojiak")).get(0).getInformation());
+		assertSame(products.get(0).getProductPrice(), (Product.equalProduct(products, "Kojiak")).get(0).getProductPrice());
+		assertEquals(products.get(0).getProductType(), (Product.equalProduct(products, "Kojiak")).get(0).getProductType());
+		
 	}
 
 	@Test
-	public void testDeleteProduct() {
-		fail("Not yet implemented");
+	public void testDeleteProduct() throws PriceException, IOException {
+		products.add(new Product("Fuji", "best ever",
+				ProductType.Camera, 120));
+		assertTrue(products.size() == 2);	
+		Product.deleteProduct(products, "Kojiak");		
+		assertTrue(products.size() == 1);
 	}
 
 	@Test
 	public void testIsBackup() {
-		fail("Not yet implemented");
+		assertTrue(products.get(0).isBackup()==false);
 	}
 
 	@Test
 	public void testSetBackup() {
-		fail("Not yet implemented");
+		products.get(0).setDiscount(true);
+		assertTrue(products.get(0).isDiscount()==true);
 	}
 
 	@Test
-	public void testIsCleanBox() {
-		fail("Not yet implemented");
+	public void testIsDiscount() {
+		assertTrue(products.get(0).isDiscount()==false);
+		
 	}
 
 	@Test
-	public void testSetCleanBox() {
-		fail("Not yet implemented");
+	public void testSetDiscount() {
+		products.get(0).setDiscount(true);
+		assertTrue(products.get(0).isDiscount()==true);
 	}
 
 	@Test
-	public void testGetProductBoxColor() {
-		fail("Not yet implemented");
+	public void testGetProductPrice() {
+		assertTrue(products.get(0).getProductPrice() == 0);
 	}
 
 	@Test
-	public void testSetProductBoxColor() {
-		fail("Not yet implemented");
+	public void testSetProductPrice() {
+		products.get(0).setProductPrice(10);
+		assertTrue(products.get(0).getProductPrice() == 10);
 	}
 
 	@Test
 	public void testGetProductType() {
-		fail("Not yet implemented");
+		assertTrue(products.get(0).getProductType().equals(ProductType.Film));
 	}
 
 	@Test
 	public void testSetProductType() {
-		fail("Not yet implemented");
+		products.get(0).setProductType(ProductType.Camera);
+		assertTrue(products.get(0).getProductType().equals(ProductType.Camera));
+	}
+
+	@Test
+	public void testGetPrice() {
+		assertTrue(products.get(0).getPrice() == 10);
+	}
+
+	@Test
+	public void testSetPrice() {
+		products.get(0).setPrice(20);
+		assertTrue(products.get(0).getPrice() == 20);
 	}
 
 }

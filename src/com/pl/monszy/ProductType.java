@@ -2,6 +2,6 @@ package com.pl.monszy;
 
 public enum ProductType {
 	
-	Camera, Film, Komputers
+	Camera, Film, Computer
 
 }

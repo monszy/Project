@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.apache.log4j.Logger;
-import com.pl.monszy.*;
 
 public class DiscountProduct implements IProductProcesses {
 
@@ -16,7 +15,7 @@ public class DiscountProduct implements IProductProcesses {
 		event.get_Product().setDiscount(true);
 		double lastPrice=event.get_Product().getPrice();
 		event.get_Product().setPrice(lastPrice*0.9);
-		logger.info(event.get_Product().getName() + " - cleaned Product box at " + calendar.getTime());
+		logger.info(event.get_Product().getName() + " - Discount product at " + calendar.getTime());
 
 	}
 
