@@ -34,7 +34,7 @@ public class Main {
 		} catch (PriceException exception) {
 			logger.error(exception);
 		}
-
+        
 		ArrayList<Person> Persons = new ArrayList<Person>();
 		Persons.add(new Person("Jan", "Nowak"));
 		Persons.add(new Person("Gabrys", "Szmel"));
@@ -110,9 +110,10 @@ public class Main {
 			case 3:
 				// wy�wietlenie listy produkt�w
 				Product.showlistproducts(products);
+				
 				break;
 			case 4:
-				Person.showlistperson(Persons);
+				Person.addPerson(Persons);
 				break;
 			case 5:
 				Product.addProduct(products);
@@ -153,7 +154,8 @@ public class Main {
 				}
 
 				break;
-
+			
+			
 			case 10: // exit
 				System.exit(0);
 

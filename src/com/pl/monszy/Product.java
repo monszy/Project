@@ -235,7 +235,7 @@ public class Product {
 	public static void deleteProduct(ArrayList<Product> products, String a)
 			throws IOException {
 		int f = products.indexOf(searchProduct(products, a))+1;
-		System.out.println(f);
+		
 		products.remove(f);
 
 	}
