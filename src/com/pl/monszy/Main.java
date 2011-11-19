@@ -6,6 +6,7 @@ import java.util.*;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 import com.pl.monszy.PriceException;
+import com.pl.monszy.Product;
 import events.*;
 
 public class Main {
@@ -41,30 +42,30 @@ public class Main {
 
 		IProductProcesses backupProduct = new BackupProduct();
 		ProcesProduct procesProduct = new ProcesProduct();
-		IProductProcesses cleanProductBox = new CleanProductBox();
-		IProductProcesses changeProductBox = new ChangeProductBox();
+		IProductProcesses discountProduct = new DiscountProduct();
+		IProductProcesses changeProductPrice = new ChangeProductPrice();
 
 		System.out.println("Product processes Film type");
-		Product.equalProduct(products, "Kojiak").get(0).setCleanBox(false);
-		System.out.println("Kojiak Clen box before - "
-				+ Product.equalProduct(products, "Kojiak").get(0).isCleanBox());
-		System.out.println("Kojiak Color box before - "
+		Product.equalProduct(products, "Kojiak").get(0).setDiscount(false);
+		System.out.println("Kojiak set Discount before - "
+				+ Product.equalProduct(products, "Kojiak").get(0).isDiscount());
+		System.out.println("Kojiak Product Price before - "
 				+ Product.equalProduct(products, "Kojiak").get(0)
-						.getProductBoxColor());
-		System.out.println("Kojiak Backup game before - "
+						.getProductPrice());
+		System.out.println("Kojiak Backup Product before - "
 				+ Product.equalProduct(products, "Kojiak").get(0).isBackup());
 
-		procesProduct.addProcess(cleanProductBox);
-		procesProduct.addProcess(changeProductBox);
+		procesProduct.addProcess(discountProduct);
+		procesProduct.addProcess(changeProductPrice);
 		procesProduct.addProcess(backupProduct);
 		procesProduct.executeProcesses(Product.equalProduct(products,
 				"Kojiak"));
-		System.out.println("Kojiak Clen box after - "
-				+ Product.equalProduct(products, "Kojiak").get(0).isCleanBox());
-		System.out.println("Kojiak Color box after - "
+		System.out.println("Kojiak Discount after - "
+				+ Product.equalProduct(products, "Kojiak").get(0).isDiscount());
+		System.out.println("Kojiak Product Price after - "
 				+ Product.equalProduct(products, "Kojiak").get(0)
-						.getProductBoxColor());
-		System.out.println("Kojiak Backup game after - "
+						.getProductPrice());
+		System.out.println("Kojiak Backup Product after - "
 				+ Product.equalProduct(products, "Kojiak").get(0).isBackup());
 
 		do {

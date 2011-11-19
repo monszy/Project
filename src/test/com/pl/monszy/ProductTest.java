@@ -9,8 +9,9 @@ import org.junit.*;
 import com.pl.monszy.*;
 
 public class ProductTest {
-
-	Person person = new Person("Szymon", "Stasiak");
+	
+	ArrayList<Product> products = new ArrayList<Product>();
+	
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -22,70 +23,43 @@ public class ProductTest {
 
 	@Before
 	public void setUp() throws Exception {
-		person.addProduct("Fuji", "Dobry film nie jest z³y", ProductType.Film,
-				10);
+		products.add(new Product("Kojiak", "best film ever",
+					ProductType.Film, 10));
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		products.clear();
 	}
-
-	@Test
-	public void testProductStringStringProductType() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testProductStringStringProductTypeArrayListOfPerson() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPrintProduct() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPrintPersons() {
-		fail("Not yet implemented");
-	}
+	
 
 	@Test
 	public void testGetName() {
-		assertTrue(person.getProducts().get(0).getName().equals("Kojiak"));
+		assertTrue(products.get(0).getName().equals("Kojiak"));
 	}
 
 	@Test
 	public void testSetName() {
-		person.getProducts().get(0).setName("Kojiak");
-		assertTrue(person.getProducts().get(0).getName().equals("Kojiak"));
+		products.get(0).setName("Fuji");
+		assertTrue(products.get(0).getName().equals("Fuji"));
 	}
 
 	@Test
 	public void testGetInformation() {
-		assertTrue(person.getProducts().get(0).getInformation()
+	assertTrue(products.get(0).getInformation()
 				.equals("best film ever"));
 	}
 
 	@Test
 	public void testSetInformation() {
-		person.getProducts().get(0).setInformation("best film");
-		assertTrue(person.getProducts().get(0).getInformation().equals("best film"));
+		products.get(0).setInformation("best film");
+		assertTrue(products.get(0).getInformation().equals("best film"));
 	}
 
-	@Test
-	public void testGetPersons() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetPersons() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testShowlistproducts() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test

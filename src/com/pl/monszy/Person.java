@@ -27,15 +27,7 @@ public class Person {
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 	}
-	public void addProduct(String name, String information, ProductType productType, 
-			int price) throws PriceException {
-		if (price > 0) {
-			products.add(new Product(name, information,productType, price));
-			logger.info("Game: " + name + " - added");
-		}
-		if (price <= 0)
-			throw new PriceException("Price cannot by less than 0");
-	}
+	
 
 	public Person(String imie, String nazwisko, ArrayList<Product> products) {
 		PropertyConfigurator.configure("Log4J.properties");
@@ -48,8 +40,11 @@ public class Person {
 		System.out.println("imie: " + imie + "\t nazwisko: " + nazwisko);
 	}
 
+	
+	
+	
+	
 	public ArrayList<Product> products = new ArrayList<Product>();
-
 	public void printProducts() {
 		int pozycja = 1;
 		for (Product c : this.products)
@@ -100,10 +95,13 @@ public class Person {
 	}
 
 	public static void showlistperson(ArrayList<Person> Persons) throws PriceException {
-		Product d = new Product("Film", "best film ever", ProductType.Camera, 10,
-				Persons);
+		Product d = new Product("Kojiak", "best film ever",
+				ProductType.Film, 10, Persons);
 		d.printPersons();
+		logger.info("wyswietliles Osob");
 	}
+		
+	
 
 	public static void editlistPersons(ArrayList<Person> Persons, int fc)
 			throws IOException {

@@ -15,7 +15,7 @@ public class Product {
 	public String name;
 	public String information;
 	public ProductType productType;
-	public int Price;
+	public double Price;
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 	String choiceString;
@@ -25,8 +25,8 @@ public class Product {
 	int f = 0;
 	int choice;
 	public boolean backup;
-	public boolean cleanBox;
-	public String ProductBoxColor;
+	public boolean Discount;
+	public int ProductPrice;
 
 	public Product(String name, String information, ProductType productType,
 			int Price) throws PriceException {
@@ -40,28 +40,22 @@ public class Product {
 	public Product(String name, String information, ProductType productType,
 			int Price, ArrayList<Person> Persons) throws PriceException {
 		PropertyConfigurator.configure("Log4J.properties");
-		this.cleanBox = true;
+		this.Discount = true;
 		this.backup = false;
-		this.ProductBoxColor = "white";
+		this.ProductPrice = 20;
 		this.productType = productType;
 		this.name = name;
 		this.information = information;
-		this.Persons = Persons;
+		
 		this.Price = Price;
 	}
 
 	public void printProduct() {
 		System.out.println("name: " + name + "\t information: " + information
-				+ "\t Product type: " + productType + "\t Cena: " + Price);
+				+ "\t Product type: " + productType + "\t Price: " + Price);
 	}
 
-	public List<Person> Persons = new ArrayList<Person>();
-
-	public void printPersons() {
-		for (Person g : this.Persons) {
-			g.printPerson();
-		}
-	}
+	
 
 	public String getName() {
 		return name;
@@ -79,14 +73,20 @@ public class Product {
 	public void setInformation(String information) {
 		this.information = information;
 	}
+	public ArrayList<Person> Persons = new ArrayList<Person>();
 
-	public List<Person> getPersons() {
-		return Persons;
-	}
+	
+	public void printPersons() {
+		int pozycja = 1;
+		for (Person c : this.Persons)
 
-	public void setPersons(List<Person> persons) {
-		Persons = persons;
+		{
+			System.out.print(pozycja + " ");
+			c.printPerson();
+			pozycja++;
+		}
 	}
+	
 
 	public static void showlistproducts(ArrayList<Product> products) {
 		Person o = new Person("Jan", "Nowak", products);
@@ -112,9 +112,17 @@ public class Product {
 		System.out.print("Podaj cene produktu: ");
 		strprice = in.readLine();
 		price = Integer.parseInt(strprice);
+		if (price > 0) {
 		// dodanie elementu do listy produkt�w
 		products.add(new Product(name, description, type, price));
+		logger.info("Game: " + name + " - added");
+		}
+		if (price <= 0)
+			throw new PriceException("Price cannot by less than 0");
 	}
+	
+			
+		
 
 	public static void editlistproducts(ArrayList<Product> products, int fc)
 			throws IOException, PriceException {
@@ -244,20 +252,20 @@ public class Product {
 		this.backup = backup;
 	}
 
-	public boolean isCleanBox() {
-		return cleanBox;
+	public boolean isDiscount() {
+		return Discount;
 	}
 
-	public void setCleanBox(boolean cleanBox) {
-		this.cleanBox = cleanBox;
+	public void setDiscount(boolean Discount) {
+		this.Discount = Discount;
 	}
 
-	public String getProductBoxColor() {
-		return ProductBoxColor;
+	public int getProductPrice() {
+		return ProductPrice;
 	}
 
-	public void setProductBoxColor(String ProductBoxColor) {
-		this.ProductBoxColor = ProductBoxColor;
+	public void setProductPrice(int i) {
+		this.ProductPrice = ProductPrice;
 	}
 
 	public ProductType getProductType() {
@@ -268,11 +276,14 @@ public class Product {
 		this.productType = productType;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return Price;
 	}
 
-	public void setPrice(int price) {
-		Price = price;
+	public void setPrice(double d) {
+		Price = d;
 	}
+
+	
+	
 }
