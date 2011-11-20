@@ -101,6 +101,7 @@ public class Person {
 	public static void addPerson(ArrayList<Person> Persons) throws IOException, PriceException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		ArrayList<Product> AryProducts = new ArrayList<Product>();
+		//ArrayList<Product> produc = new ArrayList<Product>();
 		String a = null;
 		String b = null;
 		String sizestr = null;
@@ -114,7 +115,7 @@ public class Person {
 		int size = Integer.parseInt(sizestr);
 		for (int i = 1; i <= size; i++){
 		System.out.print("Podaj " + i +" product");
-		Product.addProduct(AryProducts, products);
+		Product.addProduct(products, AryProducts);
 		
 		}
 		// dodanie element�w do listy os�b
@@ -143,7 +144,7 @@ public class Person {
 				System.out.println("nie ma takiej osoby na liscie");
 			else {
 
-				f = Persons.indexOf(searchPerson(Persons, a));
+				f = Persons.indexOf(searchPerson(Persons, a))+1;
 
 				System.out.print("Podaj imie: ");
 				c = in.readLine();

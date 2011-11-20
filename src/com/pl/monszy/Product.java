@@ -197,7 +197,7 @@ public class Product {
 				c.printProduct();
 				results.add(c);
 				return results;
-			} else if (c.getProductType().equals(ProductType.valueOf(a))) {
+			} else if (c.getProductType().equals(a)) {
 				System.out.println("Produkt typu: " + c.getProductType()
 						+ " znajduje sie na pozycji " + pozycja
 						+ ". Na liscie Produktow");
