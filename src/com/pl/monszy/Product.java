@@ -88,24 +88,11 @@ public class Product {
 		logger.info("wyswietliles produkty");
 	}
 
-	public static void addProduct(ArrayList<Product> products, ArrayList<Product> AryProducts)
+	public static void addProduct(ArrayList<Product> products, ArrayList<Product> AryProducts, String name, String description, ProductType type, int price)
 			throws IOException, PriceException {
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		
 		logger.info("dodales produkt");
-		String name = null;
-		String description = null;
-		ProductType type = null;
-		int price = 0;
-		String strprice = null;
-		System.out.print("Podaj nazwe: ");
-		name = in.readLine();
-		System.out.print("Podaj opis: ");
-		description = in.readLine();
-		System.out.print("Podaj typ produktu: ");
-		type = ProductType.valueOf(in.readLine());
-		System.out.print("Podaj cene produktu: ");
-		strprice = in.readLine();
-		price = Integer.parseInt(strprice);
+		
 		if (price > 0) {
 		// dodanie elementu do listy produkt�w
 		products.add(new Product(name, description, type, price));

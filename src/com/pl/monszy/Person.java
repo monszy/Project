@@ -98,7 +98,7 @@ public class Person {
 		Person.products = products;
 	}
 
-	public static void addPerson(ArrayList<Person> Persons) throws IOException, PriceException {
+	public static void addPerson(ArrayList<Person> Persons, String name, String description, ProductType type, int price) throws IOException, PriceException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		ArrayList<Product> AryProducts = new ArrayList<Product>();
 		//ArrayList<Product> produc = new ArrayList<Product>();
@@ -115,7 +115,7 @@ public class Person {
 		int size = Integer.parseInt(sizestr);
 		for (int i = 1; i <= size; i++){
 		System.out.print("Podaj " + i +" product");
-		Product.addProduct(products, AryProducts);
+		Product.addProduct(products, AryProducts, name, description, type, price);
 		
 		}
 		// dodanie element�w do listy os�b

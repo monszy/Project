@@ -10,6 +10,42 @@ import events.*;
 
 public class Main {
 	private static Logger logger = Logger.getLogger(Main.class);
+	
+	public static String ReadName() throws IOException, PriceException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		logger.info("dodales produkt");
+		String name = null;
+		
+
+		
+		System.out.print("Podaj nazwe: ");
+		name = in.readLine();
+		
+		
+		
+		return name;
+
+		 }
+	public static String ReadDescription() throws IOException, PriceException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		String description = null;
+		System.out.print("Podaj opis: ");
+		return description = in.readLine();
+	}
+		public static ProductType ReadType() throws IOException, PriceException {
+			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+			ProductType type = null;
+			System.out.print("Podaj typ produktu: ");
+			return type = ProductType.valueOf(in.readLine());
+		}
+			public static int ReadPrice() throws IOException, PriceException {
+				BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+				int price = 0;
+				String strprice = null;
+				System.out.print("Podaj cene produktu: ");
+				strprice = in.readLine();
+				return price = Integer.parseInt(strprice);
+			}
 
 	public static void main(String[] args) throws IOException, PriceException {
 		PropertyConfigurator.configure("Log4J.properties");
@@ -66,6 +102,8 @@ public class Main {
 						.getProductPrice());
 		System.out.println("Kojiak Backup Product after - "
 				+ Product.equalProduct(products, "Kojiak").get(0).isBackup());
+		
+		
 
 		do {
 			pouse.Sec(4);
@@ -113,10 +151,10 @@ public class Main {
 				Person.showlistPerson(Persons);
 				break;
 			case 4:
-				Person.addPerson(Persons);
+				Person.addPerson(Persons, ReadName(), ReadDescription(), ReadType(), ReadPrice());
 				break;
 			case 5:
-				Product.addProduct(products, AryProducts);
+				Product.addProduct(products, AryProducts, ReadName(), ReadDescription(), ReadType(), ReadPrice());
 				break;
 			case 6:
 
