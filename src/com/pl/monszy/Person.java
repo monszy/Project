@@ -9,8 +9,6 @@ import java.util.List;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
-
-
 public class Person {
 	private static Logger logger = Logger.getLogger(Main.class);
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -24,13 +22,6 @@ public class Person {
 	public String imie;
 	public String nazwisko;
 
-	public Person(String imie, String nazwisko) {
-		PropertyConfigurator.configure("Log4J.properties");
-		this.imie = imie;
-		this.nazwisko = nazwisko;
-	}
-	
-
 	public Person(String imie, String nazwisko, ArrayList<Product> AryProducts) {
 		PropertyConfigurator.configure("Log4J.properties");
 		this.imie = imie;
@@ -39,11 +30,14 @@ public class Person {
 	}
 
 	public void printPerson() {
-		System.out.println("imie: " + imie + "\t nazwisko: " + nazwisko + "\t produkty: " + Person.products);
+		System.out.println("imie: " + imie + "\t nazwisko: " + nazwisko
+				+ "\t produkty: " + Person.products);
 	}
-	public static ArrayList<Person> Persons= new ArrayList<Person>();
+
+	public static ArrayList<Person> Persons = new ArrayList<Person>();
+
 	public void printPersons() {
-		
+
 		int pozycja = 1;
 		for (Person c : Persons)
 
@@ -53,16 +47,9 @@ public class Person {
 			pozycja++;
 		}
 	}
-	
-	public static void showlistPerson(ArrayList<Person> Persons) {
-		Person o = new Person("Jan", "Nowak", products);
-		o.printPersons();
-		logger.info("wyswietliles produkty");
-	}
-	
-	
-	
+
 	public static ArrayList<Product> products = new ArrayList<Product>();
+
 	public void printProducts() {
 		int pozycja = 1;
 		for (Product c : Person.products)
@@ -98,14 +85,16 @@ public class Person {
 		Person.products = products;
 	}
 
-	public static void addPerson(ArrayList<Person> Persons, String name, String description, ProductType type, int price) throws IOException, PriceException {
+	public static void addPerson(ArrayList<Person> Persons, String name,
+			String description, ProductType type, int price)
+			throws IOException, PriceException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		ArrayList<Product> AryProducts = new ArrayList<Product>();
-		//ArrayList<Product> produc = new ArrayList<Product>();
+		// ArrayList<Product> produc = new ArrayList<Product>();
 		String a = null;
 		String b = null;
 		String sizestr = null;
-		
+
 		System.out.print("Podaj imie: ");
 		a = in.readLine();
 		System.out.print("Podaj nazwisko: ");
@@ -113,18 +102,16 @@ public class Person {
 		System.out.print("Ile produktow chcesz dodac do listy tej osoby? ");
 		sizestr = in.readLine();
 		int size = Integer.parseInt(sizestr);
-		for (int i = 1; i <= size; i++){
-		System.out.print("Podaj " + i +" product");
-		Product.addProduct(products, AryProducts, name, description, type, price);
-		
+		for (int i = 1; i <= size; i++) {
+			System.out.print("Podaj " + i + " product");
+			Product.addProduct(products, AryProducts, name, description, type,
+					price);
+
 		}
 		// dodanie element�w do listy os�b
-		
+
 		Persons.add(new Person(a, b, AryProducts));
 	}
-	
-		
-	
 
 	public static void editlistPersons(ArrayList<Person> Persons, int fc)
 			throws IOException {
@@ -144,7 +131,7 @@ public class Person {
 				System.out.println("nie ma takiej osoby na liscie");
 			else {
 
-				f = Persons.indexOf(searchPerson(Persons, a))+1;
+				f = Persons.indexOf(searchPerson(Persons, a)) + 1;
 
 				System.out.print("Podaj imie: ");
 				c = in.readLine();
@@ -153,7 +140,7 @@ public class Person {
 
 				try {
 
-					Persons.set(f, new Person(c, b));
+					Persons.set(f, new Person(c, b, products));
 				} catch (ArrayIndexOutOfBoundsException e) {
 
 					System.out
@@ -213,7 +200,7 @@ public class Person {
 
 	public static void deletePerson(ArrayList<Person> Persons, String a)
 			throws IOException {
-		int f = Persons.indexOf(searchPerson(Persons, a))+1;
+		int f = Persons.indexOf(searchPerson(Persons, a)) + 1;
 		Persons.remove(f);
 
 	}

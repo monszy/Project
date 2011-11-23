@@ -148,7 +148,7 @@ public class Main {
 			case 3:
 				// wy�wietlenie listy produkt�w
 				Product.showlistproducts(products);
-				Person.showlistPerson(Persons);
+				//Person.showlistPerson(Persons);
 				break;
 			case 4:
 				Person.addPerson(Persons, ReadName(), ReadDescription(), ReadType(), ReadPrice());
